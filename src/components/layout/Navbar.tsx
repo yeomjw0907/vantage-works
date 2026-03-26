@@ -46,7 +46,7 @@ export function Navbar() {
               <img
                 src="/logo-horizontal.png"
                 alt="VANTAGE WORKS"
-                className="h-8 w-auto"
+                className="h-[3.75rem] w-auto"
                 loading="eager"
               />
             </Link>
