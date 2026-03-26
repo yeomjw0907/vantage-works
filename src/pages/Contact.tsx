@@ -142,9 +142,9 @@ export function Contact() {
               
               <div className="space-y-4">
                 {[
-                  { icon: MapPin, title: "Headquarters", desc: "인천시 동구 금곡로 40 3층" },
-                  { icon: Phone, title: "Phone", desc: "010-3325-9611\n(평일 09:00 - 18:00)" },
-                  { icon: Mail, title: "Email", desc: "kainwoong@gmail.com\n(24시간 접수 가능)" },
+                  { icon: MapPin, title: "Headquarters", desc: "인천광역시 동구 금곡로 40, 3층(금곡동)" },
+                  { icon: Phone, title: "Phone", desc: "010-3213-1319\n(평일 09:00 - 18:00)" },
+                  { icon: Mail, title: "Email", desc: "vantageworks@naver.com\n(24시간 접수 가능)" },
                   { icon: Building2, title: "Global Offices", desc: "중국 이우 (Yiwu) 지사\n중국 웨이하이 (Weihai) 물류센터" }
                 ].map((info, idx) => (
                   <div key={idx} className="flex items-start gap-5 p-6 rounded-2xl bg-background border border-border/50 shadow-sm hover:shadow-md hover:border-primary/30 transition-all group">

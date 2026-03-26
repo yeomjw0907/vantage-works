@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(npx shadcn@latest add \"https://21st.dev/r/aceternity/world-map-demo\")",
+      "Bash(npx shadcn@latest add @aceternity/world-map-demo)"
+    ]
+  }
+}

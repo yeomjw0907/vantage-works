@@ -29,9 +29,16 @@ export function Navbar() {
   const navItems = navItemsRaw.filter((item) => item.href !== "/" && item.name !== "홈");
 
   const isServiceActive = location.pathname.startsWith("/services") || location.pathname === "/sourcing-tour";
+  const isHomePage = location.pathname === "/";
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <nav
+      className={[
+        "sticky top-0 z-50 w-full border-b",
+        isHomePage ? "border-transparent bg-transparent backdrop-blur-0" : "border-border/40 bg-background/80",
+        isHomePage ? "" : "backdrop-blur-md supports-[backdrop-filter]:bg-background/60",
+      ].join(" ")}
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center">

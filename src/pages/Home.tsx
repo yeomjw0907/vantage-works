@@ -112,70 +112,77 @@ export function Home() {
         description="굿즈 OEM·ODM, 중국 소싱, 웨이하이 구매대행·물류, 이우 1:1 소싱투어까지 한 팀으로 운영합니다. 기획부터 검수·출고까지 든든한 제조·소싱 파트너."
         path="/"
       />
-      {/* Hero Section - Premium & Trustworthy */}
-      <section className="relative overflow-hidden bg-background pt-28 pb-20 lg:pt-40 lg:pb-32">
-        {/* Architectural Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-        
-        {/* Glowing Orbs for Primary/Secondary integration */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] opacity-40 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-secondary/20 to-primary/10 rounded-full blur-[120px] mix-blend-normal"></div>
-        </div>
-        
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-5xl mx-auto"
-          >
-            {/* Premium Badge */}
-            <div className="inline-flex items-center rounded-full border border-primary/30 bg-background/50 backdrop-blur-md px-5 py-2 text-sm font-bold text-primary mb-10 shadow-[0_0_20px_rgba(var(--primary),0.15)]">
-              <span className="relative flex h-2.5 w-2.5 mr-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
-              </span>
-              글로벌 소싱의 새로운 기준, 밴티지웍스
-            </div>
-            
-            {/* Massive Typography */}
-            <h1 className="text-5xl sm:text-6xl lg:text-[5.5rem] font-black tracking-tighter text-foreground leading-[1.05] mb-8">
-              굿즈 제작부터 중국 소싱까지 <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary">
-                한 팀으로 완벽하게.
-              </span>
-            </h1>
-            
-            <p className="mt-8 text-xl sm:text-2xl leading-relaxed text-muted-foreground max-w-3xl mx-auto font-medium">
-              한국 사무실에서 기획·커뮤니케이션을 정리하고, 중국 현지 조직이 실행을 맡습니다.<br className="hidden md:block" />
-              이우 소싱팀과 웨이하이 전담팀이 <span className="text-foreground font-semibold">샘플부터 양산, 검수, 출고까지</span> 끊김 없이 관리합니다.
-            </p>
-            
-            {/* CTA Buttons */}
-            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
-              <Link 
-                to="/contact" 
-                className={buttonVariants({ 
-                  size: "lg", 
-                  className: "h-16 px-10 rounded-full font-bold text-lg w-full sm:w-auto shadow-[0_10px_40px_-10px_rgba(var(--primary),0.5)] hover:shadow-[0_10px_40px_-5px_rgba(var(--primary),0.6)] hover:-translate-y-1 transition-all duration-300" 
-                })}
-              >
-                프로젝트 문의하기 <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-              <Link 
-                to="/portfolio" 
-                className={buttonVariants({ 
-                  variant: "outline", 
-                  size: "lg", 
-                  className: "h-16 px-10 rounded-full font-bold text-lg w-full sm:w-auto bg-background/50 backdrop-blur-md border-border/60 hover:bg-muted hover:-translate-y-1 transition-all duration-300" 
-                })}
-              >
-                <PlayCircle className="mr-2 h-5 w-5 text-muted-foreground" />
-                납품 사례 보기
-              </Link>
-            </div>
-          </motion.div>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-background" style={{ minHeight: "100svh" }}>
+        {/* Spline 3D — full background */}
+        <spline-viewer
+          url="https://prod.spline.design/KwnJcKT8XxDKMPCo/scene.splinecode"
+          loading="lazy"
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }}
+        />
 
+        {/* Top fade */}
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background to-transparent z-10 pointer-events-none" />
+        {/* Bottom fade */}
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
+        {/* Left vignette for text legibility */}
+        <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-background/60 to-transparent z-10 pointer-events-none" />
+
+        {/* Text Content */}
+        <div className="relative z-20 flex items-center" style={{ minHeight: "100svh" }}>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="max-w-2xl text-left"
+            >
+              {/* Premium Badge */}
+              <div className="inline-flex items-center rounded-full border border-primary/30 bg-background/50 backdrop-blur-md px-5 py-2 text-sm font-bold text-primary mb-10 shadow-[0_0_20px_rgba(var(--primary),0.15)]">
+                <span className="relative flex h-2.5 w-2.5 mr-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
+                </span>
+                글로벌 소싱의 새로운 기준, 밴티지웍스
+              </div>
+
+              <h1 className="text-5xl sm:text-6xl lg:text-[5rem] font-black tracking-tighter text-foreground leading-[1.05] mb-8">
+                굿즈 제작부터<br />중국 소싱까지
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-secondary">
+                  한 팀으로 완벽하게.
+                </span>
+              </h1>
+
+              <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground max-w-xl font-medium">
+                한국 사무실에서 기획·커뮤니케이션을 정리하고, 중국 현지 조직이 실행을 맡습니다.
+                이우 소싱팀과 웨이하이 전담팀이 <span className="text-foreground font-semibold">샘플부터 양산, 검수, 출고까지</span> 끊김 없이 관리합니다.
+              </p>
+
+              <div className="mt-10 flex flex-col sm:flex-row items-start gap-4">
+                <Link
+                  to="/contact"
+                  className={buttonVariants({
+                    size: "lg",
+                    className: "h-14 px-8 rounded-full font-bold text-lg w-full sm:w-auto shadow-[0_10px_40px_-10px_rgba(var(--primary),0.5)] hover:shadow-[0_10px_40px_-5px_rgba(var(--primary),0.6)] hover:-translate-y-1 transition-all duration-300"
+                  })}
+                >
+                  프로젝트 문의하기 <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+                <Link
+                  to="/portfolio"
+                  className={buttonVariants({
+                    variant: "outline",
+                    size: "lg",
+                    className: "h-14 px-8 rounded-full font-bold text-lg w-full sm:w-auto bg-background/50 backdrop-blur-md border-border/60 hover:bg-muted hover:-translate-y-1 transition-all duration-300"
+                  })}
+                >
+                  <PlayCircle className="mr-2 h-5 w-5 text-muted-foreground" />
+                  납품 사례 보기
+                </Link>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

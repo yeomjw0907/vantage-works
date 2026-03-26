@@ -14,9 +14,9 @@ export function Footer() {
   const defaultCompanyName = "VANTAGE WORKS";
   const defaultCompanyDescription =
     "굿즈 제작부터 중국 소싱, OEM·ODM까지 한 팀으로 운영합니다.\n성공적인 비즈니스를 위한 든든한 파트너가 되겠습니다.";
-  const defaultAddress = "인천시 동구 금곡로 40 3층";
-  const defaultPhone = "010-3325-9611";
-  const defaultEmail = "kainwoong@gmail.com";
+  const defaultAddress = "인천광역시 동구 금곡로 40, 3층(금곡동)";
+  const defaultPhone = "010-3213-1319";
+  const defaultEmail = "vantageworks@naver.com";
 
   const defaultServiceLinks: FooterLink[] = [
     { label: "굿즈 OEM·ODM", href: "/services/oem" },
@@ -34,10 +34,15 @@ export function Footer() {
 
   const companyName = siteSettings?.company_name ?? defaultCompanyName;
   const companyDescription = siteSettings?.company_description ?? defaultCompanyDescription;
+  const companyDescriptionLines = companyDescription
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0 && !line.startsWith("대표자:") && !line.startsWith("대표자 :"));
   const address = siteSettings?.address ?? defaultAddress;
   const phone = siteSettings?.phone ?? defaultPhone;
   const email = siteSettings?.email ?? defaultEmail;
   const representative = "가인웅";
+  const businessRegistrationNumber = "503-87-02060";
 
   const serviceLinks = siteSettings?.footer_service_links?.length
     ? siteSettings.footer_service_links
@@ -55,18 +60,24 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
             <h3 className="text-xl font-extrabold tracking-tight text-primary">{companyName}</h3>
-            <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              {companyDescription.split("\n").map((line, idx, arr) => (
-                <span key={idx}>
-                  {line}
-                  {idx < arr.length - 1 ? <br /> : null}
-                </span>
-              ))}
-            </p>
+            {companyDescriptionLines.length > 0 && (
+              <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-sm">
+                {companyDescriptionLines.map((line, idx, arr) => (
+                  <span key={idx}>
+                    {line}
+                    {idx < arr.length - 1 ? <br /> : null}
+                  </span>
+                ))}
+              </p>
+            )}
             <div className="mt-8 space-y-3 text-sm text-muted-foreground">
               <p className="flex items-center gap-2">
                 <span className="font-semibold text-foreground">대표자</span>
                 {representative}
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="font-semibold text-foreground">사업자번호</span>
+                {businessRegistrationNumber}
               </p>
               <p className="flex items-center gap-2">
                 <span className="font-semibold text-foreground">주소</span>
@@ -177,6 +188,7 @@ export function Footer() {
                             <h4 className="font-semibold text-foreground">제8조 (사업자 정보)</h4>
                             <p>상호: {companyName}</p>
                             <p>대표자: {representative}</p>
+                            <p>사업자등록번호: {businessRegistrationNumber}</p>
                             <p>주소: {address}</p>
                             <p>연락처: {phone}</p>
                             <p>이메일: {email}</p>
