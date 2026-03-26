@@ -113,7 +113,7 @@ export function Home() {
         path="/"
       />
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-background" style={{ minHeight: "100svh" }}>
+      <section className="relative overflow-hidden bg-background">
         {/* Spline 3D — full background */}
         <spline-viewer
           url="https://prod.spline.design/KwnJcKT8XxDKMPCo/scene.splinecode"
@@ -129,8 +129,8 @@ export function Home() {
         <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-background/60 to-transparent z-10 pointer-events-none" />
 
         {/* Text Content */}
-        <div className="relative z-20 flex items-center" style={{ minHeight: "100svh" }}>
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
+        <div className="relative z-20 flex items-start sm:items-center sm:min-h-[100svh]">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:pt-28 sm:pb-20 lg:pt-40 lg:pb-32">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -155,8 +155,11 @@ export function Home() {
               </h1>
 
               <p className="text-lg sm:text-xl leading-relaxed text-muted-foreground max-w-xl font-medium">
-                한국 사무실에서 기획·커뮤니케이션을 정리하고, 중국 현지 조직이 실행을 맡습니다.
-                이우 소싱팀과 웨이하이 전담팀이 <span className="text-foreground font-semibold">샘플부터 양산, 검수, 출고까지</span> 끊김 없이 관리합니다.
+                한국 사무실에서 기획·커뮤니케이션을 정리하고,
+                <br />
+                중국 이우 소싱팀과 웨이하이 전담팀이
+                <br />
+                <span className="text-foreground font-semibold">샘플부터 양산, 검수, 출고까지</span> 끊김 없이 관리합니다.
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row items-start gap-4">

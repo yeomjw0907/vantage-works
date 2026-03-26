@@ -43,6 +43,14 @@ function normalizeGalleryUrls(raw: unknown): string[] {
   return raw.filter((u): u is string => typeof u === "string" && u.trim().length > 0);
 }
 
+function normalizeCustomerLogos(raw: unknown): string[] {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter((logo): logo is string => typeof logo === "string")
+    .map((logo) => logo.trim())
+    .filter((logo) => logo.length > 0);
+}
+
 function emptyPortfolioForm() {
   return {
     id: "",
@@ -151,8 +159,10 @@ export function AdminContent() {
     admin_phone: "",
     address: "",
     email: "",
-    customer_logos: JSON.stringify(defaultCustomerLogosForSettings, null, 2),
+    customer_logos: defaultCustomerLogosForSettings,
+    customer_logo_input: "",
   });
+  const [draggingCustomerLogoIndex, setDraggingCustomerLogoIndex] = useState<number | null>(null);
 
   const isEditingFaq = Boolean(faqForm.id);
   const isEditingPortfolio = Boolean(portfolioForm.id);
@@ -172,18 +182,21 @@ export function AdminContent() {
       setSiteSettingsRowId(null);
       setSettingsForm((s) => ({
         ...s,
-        customer_logos: JSON.stringify(defaultCustomerLogosForSettings, null, 2),
+        customer_logos: defaultCustomerLogosForSettings,
+        customer_logo_input: "",
       }));
       return;
     }
 
     setSiteSettingsRowId(data.id);
+    const customerLogos = normalizeCustomerLogos(data.customer_logos ?? defaultCustomerLogosForSettings);
     setSettingsForm({
       admin_email: data.admin_email ?? "",
       admin_phone: formatKrMobileDisplay(data.admin_phone ?? ""),
       address: data.address ?? "",
       email: data.email ?? "",
-      customer_logos: JSON.stringify(data.customer_logos ?? defaultCustomerLogosForSettings, null, 2),
+      customer_logos: customerLogos,
+      customer_logo_input: "",
     });
   }
 
@@ -192,17 +205,7 @@ export function AdminContent() {
     setLoading(true);
     try {
       const supabase = getSupabase();
-      const parseJson = <T,>(value: string) => {
-        try {
-          return JSON.parse(value) as T;
-        } catch {
-          throw new Error("JSON 형식이 올바르지 않습니다. 다시 확인해 주세요.");
-        }
-      };
-
-      const customer_logos = parseJson<string[]>(settingsForm.customer_logos).filter(
-        (logo) => typeof logo === "string" && logo.trim().length > 0,
-      );
+      const customer_logos = normalizeCustomerLogos(settingsForm.customer_logos);
 
       const inputBase = {
         admin_email: settingsForm.admin_email.trim() || null,
@@ -235,6 +238,34 @@ export function AdminContent() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function appendCustomerLogo(raw: string) {
+    const logo = raw.trim();
+    if (!logo) return;
+    setSettingsForm((s) => ({
+      ...s,
+      customer_logos: [...s.customer_logos, logo],
+      customer_logo_input: "",
+    }));
+  }
+
+  function removeCustomerLogo(targetIndex: number) {
+    setSettingsForm((s) => ({
+      ...s,
+      customer_logos: s.customer_logos.filter((_, idx) => idx !== targetIndex),
+    }));
+  }
+
+  function moveCustomerLogo(from: number, to: number) {
+    setSettingsForm((s) => {
+      if (from === to) return s;
+      if (from < 0 || to < 0 || from >= s.customer_logos.length || to >= s.customer_logos.length) return s;
+      const next = [...s.customer_logos];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return { ...s, customer_logos: next };
+    });
   }
 
   async function refreshFaq() {
@@ -1074,15 +1105,67 @@ export function AdminContent() {
             </div>
 
             <div className="space-y-2">
-              <Label>고객사 로고 텍스트 목록 (customer_logos JSON)</Label>
-              <Textarea
-                value={settingsForm.customer_logos}
+              <Label>고객사 로고 텍스트 목록</Label>
+              <Input
+                value={settingsForm.customer_logo_input}
                 onChange={(e) => {
                   const v = e.target.value;
-                  setSettingsForm((s) => ({ ...s, customer_logos: v }));
+                  setSettingsForm((s) => ({ ...s, customer_logo_input: v }));
                 }}
-                className="min-h-[120px] font-mono text-xs"
+                onKeyDown={(e) => {
+                  if (e.key !== "Enter") return;
+                  e.preventDefault();
+                  appendCustomerLogo(settingsForm.customer_logo_input);
+                }}
+                placeholder="로고명을 입력하고 Enter를 누르세요 (예: SAMSUNG)"
               />
+              <div className="rounded-xl border border-border/50 bg-muted/20 p-3">
+                <div className="flex flex-wrap gap-2">
+                  {settingsForm.customer_logos.map((logo, index) => (
+                    <div
+                      key={`${logo}-${index}`}
+                      className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background px-2 py-1 text-xs"
+                      draggable={!loading}
+                      onDragStart={() => setDraggingCustomerLogoIndex(index)}
+                      onDragOver={(e) => e.preventDefault()}
+                      onDrop={() => {
+                        if (draggingCustomerLogoIndex === null) return;
+                        moveCustomerLogo(draggingCustomerLogoIndex, index);
+                        setDraggingCustomerLogoIndex(null);
+                      }}
+                      onDragEnd={() => setDraggingCustomerLogoIndex(null)}
+                    >
+                      <button
+                        type="button"
+                        aria-label="로고 순서 변경"
+                        className="cursor-grab text-muted-foreground active:cursor-grabbing"
+                      >
+                        <span className="grid grid-cols-2 gap-[2px]">
+                          <span className="h-1 w-1 rounded-full bg-current" />
+                          <span className="h-1 w-1 rounded-full bg-current" />
+                          <span className="h-1 w-1 rounded-full bg-current" />
+                          <span className="h-1 w-1 rounded-full bg-current" />
+                          <span className="h-1 w-1 rounded-full bg-current" />
+                          <span className="h-1 w-1 rounded-full bg-current" />
+                        </span>
+                      </button>
+                      <span className="font-medium">{logo}</span>
+                      <button
+                        type="button"
+                        aria-label={`${logo} 삭제`}
+                        className="rounded-full p-0.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                        onClick={() => removeCustomerLogo(index)}
+                        disabled={loading}
+                      >
+                        X
+                      </button>
+                    </div>
+                  ))}
+                  {settingsForm.customer_logos.length === 0 && (
+                    <p className="text-xs text-muted-foreground">아직 추가된 로고가 없습니다.</p>
+                  )}
+                </div>
+              </div>
             </div>
 
             <div className="flex items-center gap-3 pt-2">
@@ -1100,7 +1183,7 @@ export function AdminContent() {
             </div>
 
             <p className="text-xs text-muted-foreground">
-              Navbar·Footer 링크는 사이트 기본값을 사용합니다. 고객사 로고 목록만 JSON으로 수정할 수 있으며 형식이 잘못되면 저장이 실패합니다.
+              Navbar·Footer 링크는 사이트 기본값을 사용합니다. 고객사 로고는 Enter로 추가하고, X로 삭제하거나 점 핸들로 순서를 바꿀 수 있습니다.
             </p>
           </CardContent>
         </Card>
