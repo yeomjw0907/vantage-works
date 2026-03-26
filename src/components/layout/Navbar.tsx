@@ -43,7 +43,12 @@ export function Navbar() {
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-2xl font-extrabold tracking-tight text-primary">VANTAGE WORKS</span>
+              <img
+                src="/logo-horizontal.png"
+                alt="VANTAGE WORKS"
+                className="h-8 w-auto"
+                loading="eager"
+              />
             </Link>
           </div>
           <div className="hidden md:block">

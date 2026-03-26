@@ -59,7 +59,12 @@ export function Footer() {
       <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
-            <h3 className="text-xl font-extrabold tracking-tight text-primary">{companyName}</h3>
+            <img
+              src="/logo-horizontal.png"
+              alt="Vantage Works"
+              className="h-8 w-auto max-w-[280px]"
+              loading="eager"
+            />
             {companyDescriptionLines.length > 0 && (
               <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-sm">
                 {companyDescriptionLines.map((line, idx, arr) => (
