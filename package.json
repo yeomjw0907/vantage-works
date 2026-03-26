@@ -1,7 +1,8 @@
 {
-  "name": "react-example",
+  "name": "vantage-works",
   "private": true,
   "version": "0.0.0",
+  "description": "밴티지웍스 공식 웹 — 굿즈 OEM·ODM, 중국 소싱, 구매대행·소싱투어",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
@@ -16,6 +17,7 @@
     "@google/genai": "^1.29.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-slot": "^1.2.4",
+    "@supabase/supabase-js": "^2.100.0",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",
     "class-variance-authority": "^0.7.1",

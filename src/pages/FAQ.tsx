@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +10,12 @@ import { buttonVariants } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { MessageCircleQuestion } from "lucide-react";
 
-const faqs = [
+type Faq = {
+  question: string;
+  answer: string;
+};
+
+const mockFaqs: Faq[] = [
   {
     question: "Q1. MOQ(최소수량)는 어떻게 되나요?",
     answer: "품목/공정/옵션에 따라 달라집니다. 기성 소싱은 비교적 유연하며, OEM·ODM은 금형/공정 여부에 따라 최소수량이 설정됩니다.",
@@ -53,6 +59,34 @@ const faqs = [
 ];
 
 export function FAQ() {
+  const [faqItems, setFaqItems] = useState<Faq[]>(mockFaqs);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      // Supabase 설정이 없으면 기존 mock 데이터를 그대로 사용합니다.
+      const { hasSupabaseConfig, getSupabase } = await import("@/lib/supabaseClient");
+      if (!hasSupabaseConfig) return;
+
+      const supabase = getSupabase();
+      const { data, error } = await supabase
+        .from("faq_items")
+        .select("question,answer")
+        .order("sort_order", { ascending: true });
+
+      if (error) return;
+      if (cancelled) return;
+      // DB에 FAQ가 비어 있으면 기존 기본 FAQ(mock)를 유지합니다.
+      if (!data || data.length === 0) return;
+      setFaqItems(data as Faq[]);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -93,8 +127,8 @@ export function FAQ() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Accordion type="single" collapsible className="w-full space-y-6">
-                {faqs.map((faq, index) => (
+              <Accordion type="single" className="w-full space-y-6">
+                {faqItems.map((faq, index) => (
                   <AccordionItem 
                     key={index} 
                     value={`item-${index}`} 

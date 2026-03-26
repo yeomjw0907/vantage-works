@@ -1,3 +1,4 @@
+import { useEffect, useState, type ComponentType } from "react";
 import { motion } from "motion/react";
 import { 
   Package, 
@@ -9,7 +10,19 @@ import {
 import { Link } from "react-router-dom";
 
 export function Services() {
-  const services = [
+  type ServiceUi = {
+    id: string;
+    title: string;
+    desc: string;
+    icon: ComponentType<{ className?: string }>;
+    link: string;
+    color: string;
+    textColor: string;
+    bgLight: string;
+    image: string;
+  };
+
+  const mockServices: ServiceUi[] = [
     {
       id: "01",
       title: "굿즈 OEM·ODM",
@@ -55,6 +68,111 @@ export function Services() {
       image: "https://picsum.photos/seed/tour/800/600"
     }
   ];
+
+  const [services, setServices] = useState<ServiceUi[]>(mockServices);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      const { hasSupabaseConfig, getSupabase } = await import("@/lib/supabaseClient");
+      if (!hasSupabaseConfig) return;
+
+      type ServiceCardRow = {
+        title: string;
+        description: string;
+        image_url: string;
+        link_path: string;
+        sort_order: number;
+      };
+
+      const supabase = getSupabase();
+      const { data, error } = await supabase
+        .from("service_cards")
+        .select("title,description,image_url,link_path,sort_order")
+        .order("sort_order", { ascending: true });
+
+      if (error) return;
+      if (cancelled) return;
+
+      const buildService = (row: ServiceCardRow, idx: number): ServiceUi => {
+        const id = String(idx + 1).padStart(2, "0");
+        const link = row.link_path;
+
+        if (link === "/services/oem") {
+          return {
+            id,
+            title: row.title,
+            desc: row.description,
+            icon: Package,
+            link,
+            color: "from-primary to-blue-600",
+            textColor: "text-primary",
+            bgLight: "bg-primary/10",
+            image: row.image_url,
+          };
+        }
+        if (link === "/services/sourcing") {
+          return {
+            id,
+            title: row.title,
+            desc: row.description,
+            icon: Search,
+            link,
+            color: "from-secondary to-teal-500",
+            textColor: "text-secondary",
+            bgLight: "bg-secondary/10",
+            image: row.image_url,
+          };
+        }
+        if (link === "/services/purchasing") {
+          return {
+            id,
+            title: row.title,
+            desc: row.description,
+            icon: Truck,
+            link,
+            color: "from-slate-700 to-slate-900",
+            textColor: "text-slate-700",
+            bgLight: "bg-slate-200",
+            image: row.image_url,
+          };
+        }
+        if (link === "/sourcing-tour") {
+          return {
+            id,
+            title: row.title,
+            desc: row.description,
+            icon: MapPin,
+            link,
+            color: "from-orange-500 to-red-500",
+            textColor: "text-orange-500",
+            bgLight: "bg-orange-500/10",
+            image: row.image_url,
+          };
+        }
+
+        // 알 수 없는 링크 경로(추가 카테고리)일 때 기본 스타일
+        return {
+          id,
+          title: row.title,
+          desc: row.description,
+          icon: Package,
+          link,
+          color: "from-primary to-secondary",
+          textColor: "text-primary",
+          bgLight: "bg-primary/10",
+          image: row.image_url,
+        };
+      };
+
+      setServices((data ?? []).map((row, idx) => buildService(row as ServiceCardRow, idx)));
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <div className="flex flex-col">

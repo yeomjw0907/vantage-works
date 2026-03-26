@@ -12,11 +12,13 @@ import {
   CheckCircle2
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { ServicesSubnav } from "@/components/layout/ServicesSubnav";
 import { Link } from "react-router-dom";
 
 export function ChinaSourcing() {
   return (
     <div className="flex flex-col bg-background">
+      <ServicesSubnav />
       {/* Hero Section - Centered Typography Layout */}
       <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border/40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
@@ -42,7 +44,16 @@ export function ChinaSourcing() {
               언어 장벽과 정보 비대칭의 한계를 넘어 성공적인 소싱을 경험하세요.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/contact" className={buttonVariants({ size: "lg", className: "h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full text-lg shadow-lg shadow-blue-600/20" })}>
+              <Link
+                to="/contact"
+                className={buttonVariants({
+                  size: "lg",
+                  // default variant의 `bg-primary/text-primary-foreground`가 커스텀 컬러를 덮는 케이스를 방지
+                  variant: "ghost",
+                  className:
+                    "h-14 px-8 !bg-blue-600 hover:!bg-blue-700 !text-white font-bold rounded-full text-lg shadow-lg shadow-blue-600/20",
+                })}
+              >
                 소싱 의뢰하기 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </div>
@@ -143,7 +154,15 @@ export function ChinaSourcing() {
           <p className="text-xl leading-relaxed text-blue-100 max-w-2xl mx-auto mb-10">
             사진 한 장, 대략적인 스펙만 주셔도 좋습니다. 가장 경쟁력 있는 단가로 찾아드리겠습니다.
           </p>
-          <Link to="/contact" className={buttonVariants({ size: "lg", className: "h-14 px-10 bg-white text-blue-600 hover:bg-slate-100 font-bold rounded-full text-lg shadow-xl hover:scale-105 transition-transform" })}>
+          <Link
+            to="/contact"
+            className={buttonVariants({
+              size: "lg",
+              variant: "ghost",
+              className:
+                "h-14 px-10 !bg-white !text-blue-600 hover:!bg-slate-100 hover:!text-blue-600 font-bold rounded-full text-lg shadow-xl hover:scale-105 transition-transform",
+            })}
+          >
             소싱 의뢰하기 <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
         </div>

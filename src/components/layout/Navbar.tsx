@@ -2,8 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
+import { useSiteSettings } from "@/lib/useSiteSettings";
 
-const navLinks = [
+const defaultNavItems = [
   { name: "홈", href: "/" },
   { name: "회사소개", href: "/about" },
   { 
@@ -24,6 +25,8 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const location = useLocation();
+  const siteSettings = useSiteSettings();
+  const navItems = siteSettings?.nav_items?.length ? siteSettings.nav_items : defaultNavItems;
 
   const isServiceActive = location.pathname.startsWith("/services") || location.pathname === "/sourcing-tour";
 
@@ -38,12 +41,14 @@ export function Navbar() {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-8">
-              {navLinks.map((link) => (
+              {navItems.map((link) => (
                 <div key={link.name} className="relative group">
                   <Link
                     to={link.href}
                     className={`text-sm font-semibold transition-colors hover:text-primary flex items-center gap-1 py-8 ${
-                      (link.name === "서비스" && isServiceActive) || location.pathname === link.href
+                      (link.href.startsWith("/services") && link.subItems && isServiceActive) ||
+                      location.pathname === link.href ||
+                      (link.subItems?.some((sub) => sub.href === location.pathname) ?? false)
                         ? "text-primary"
                         : "text-muted-foreground"
                     }`}
@@ -93,7 +98,7 @@ export function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-border/40 bg-background/95 backdrop-blur-md absolute w-full h-screen overflow-y-auto pb-24">
           <div className="space-y-1 px-4 pb-4 pt-2">
-            {navLinks.map((link) => (
+            {navItems.map((link) => (
               <div key={link.name}>
                 {link.subItems ? (
                   <div>

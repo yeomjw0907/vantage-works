@@ -11,11 +11,13 @@ import {
   PenTool
 } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { ServicesSubnav } from "@/components/layout/ServicesSubnav";
 import { Link } from "react-router-dom";
 
 export function OemOdm() {
   return (
     <div className="flex flex-col bg-background">
+      <ServicesSubnav />
       {/* Hero Section - Centered Typography Layout */}
       <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border/40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>

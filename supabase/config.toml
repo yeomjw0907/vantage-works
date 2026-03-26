@@ -1,0 +1,4 @@
+# Contact 폼 등 비로그인 사용자가 호출합니다. Edge 게이트웨이 JWT 검증을 끕니다.
+# (함수 내부는 SERVICE_ROLE 로 DB·알림만 처리합니다.)
+[functions.create-lead]
+verify_jwt = false

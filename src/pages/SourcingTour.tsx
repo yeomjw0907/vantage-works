@@ -2,11 +2,13 @@ import { motion } from "motion/react";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, Map, Users, Briefcase, ArrowRight, Target, Compass, Zap } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { ServicesSubnav } from "@/components/layout/ServicesSubnav";
 import { Link } from "react-router-dom";
 
 export function SourcingTour() {
   return (
     <div className="flex flex-col bg-[#f8fafc]">
+      <ServicesSubnav />
       {/* Hero Section - Centered Typography */}
       <section className="relative overflow-hidden bg-white py-24 lg:py-32 border-b border-slate-200">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:32px_32px]"></div>
