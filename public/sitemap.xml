@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://vantage-works.vercel.app/</loc>
+  </url>
+  <url>
+    <loc>https://vantage-works.vercel.app/about</loc>
+  </url>
+  <url>
+    <loc>https://vantage-works.vercel.app/services/oem</loc>
+  </url>
+  <url>
+    <loc>https://vantage-works.vercel.app/services/sourcing</loc>
+  </url>
+  <url>
+    <loc>https://vantage-works.vercel.app/services/purchasing</loc>
+  </url>
+  <url>
+    <loc>https://vantage-works.vercel.app/sourcing-tour</loc>
+  </url>
+  <url>
+    <loc>https://vantage-works.vercel.app/portfolio</loc>
+  </url>
+  <url>
+    <loc>https://vantage-works.vercel.app/faq</loc>
+  </url>
+  <url>
+    <loc>https://vantage-works.vercel.app/contact</loc>
+  </url>
+</urlset>
+

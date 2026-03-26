@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Phone, Mail, Send, Building2, Clock, CheckCircle2 } from "lucide-react";
 import { getSupabase } from "@/lib/supabaseClient";
+import { Seo } from "@/components/seo/Seo";
 
 export function Contact() {
   const [company, setCompany] = useState("");
@@ -60,6 +61,11 @@ export function Contact() {
 
   return (
     <div className="flex flex-col">
+      <Seo
+        title="문의하기 | 밴티지웍스"
+        description="굿즈 OEM·ODM, 중국 소싱, 구매대행·물류, 1:1 소싱투어 문의를 남겨주세요. 요구사항을 기반으로 일정/단가/리스크를 빠르게 정리해드립니다."
+        path="/contact"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border/40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>

@@ -9,6 +9,7 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { MessageCircleQuestion } from "lucide-react";
+import { Seo } from "@/components/seo/Seo";
 
 type Faq = {
   question: string;
@@ -89,6 +90,11 @@ export function FAQ() {
 
   return (
     <div className="flex flex-col">
+      <Seo
+        title="FAQ | 밴티지웍스"
+        description="굿즈 OEM·ODM, 중국 소싱, 구매대행·물류, 1:1 소싱투어 진행 시 자주 묻는 질문을 정리했습니다. MOQ, 샘플, 리드타임, 납기 등 핵심 기준을 확인하세요."
+        path="/faq"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border/40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>

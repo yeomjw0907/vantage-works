@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vantage-works.vercel.app/sitemap.xml
+

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, X, Building2 } from "lucide-react";
 import { useSiteSettings } from "@/lib/useSiteSettings";
 import { PortfolioShowcaseCard } from "@/components/portfolio/PortfolioShowcaseCard";
+import { Seo } from "@/components/seo/Seo";
 import {
   Dialog,
   DialogContent,
@@ -165,6 +166,11 @@ export function Portfolio() {
 
   return (
     <div className="flex flex-col">
+      <Seo
+        title="포트폴리오 | 밴티지웍스"
+        description="밴티지웍스의 굿즈 제작 및 소싱 프로젝트 사례를 확인하세요. 업종별/목적별 레퍼런스를 통해 예상 품질, 리드타임, 운영 포인트를 빠르게 파악할 수 있습니다."
+        path="/portfolio"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border/40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>

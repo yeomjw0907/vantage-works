@@ -4,10 +4,16 @@ import { CheckCircle2, Map, Users, Briefcase, ArrowRight, Target, Compass, Zap }
 import { buttonVariants } from "@/components/ui/button";
 import { ServicesSubnav } from "@/components/layout/ServicesSubnav";
 import { Link } from "react-router-dom";
+import { Seo } from "@/components/seo/Seo";
 
 export function SourcingTour() {
   return (
     <div className="flex flex-col bg-[#f8fafc]">
+      <Seo
+        title="1:1 소싱투어(이우) | 밴티지웍스"
+        description="보고 끝나는 투어가 아니라, 필요한 품목을 ‘결정’하는 1:1 맞춤 소싱투어를 설계합니다. 현장 가이드·통역부터 귀국 후 후속 실행까지 연결합니다."
+        path="/sourcing-tour"
+      />
       <ServicesSubnav />
       {/* Hero Section - Centered Typography */}
       <section className="relative overflow-hidden bg-white py-24 lg:py-32 border-b border-slate-200">

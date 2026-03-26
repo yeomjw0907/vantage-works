@@ -13,10 +13,16 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { ServicesSubnav } from "@/components/layout/ServicesSubnav";
 import { Link } from "react-router-dom";
+import { Seo } from "@/components/seo/Seo";
 
 export function OemOdm() {
   return (
     <div className="flex flex-col bg-background">
+      <Seo
+        title="굿즈 OEM·ODM | 밴티지웍스"
+        description="브랜드 굿즈를 기획부터 샘플·양산·패키징·납품까지 원스톱으로 진행합니다. 검증된 공장 네트워크와 품질 기준으로 안정적으로 제작합니다."
+        path="/services/oem"
+      />
       <ServicesSubnav />
       {/* Hero Section - Centered Typography Layout */}
       <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border/40">

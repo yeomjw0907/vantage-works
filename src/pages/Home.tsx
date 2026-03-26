@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle2, Globe, Truck, MapPin, ShieldCheck, Zap, BarCh
 import { motion } from "motion/react";
 import { useSiteSettings } from "@/lib/useSiteSettings";
 import { PortfolioShowcaseCard } from "@/components/portfolio/PortfolioShowcaseCard";
+import { Seo } from "@/components/seo/Seo";
 
 type HomePortfolioPreview = {
   id: string;
@@ -106,6 +107,11 @@ export function Home() {
 
   return (
     <div className="flex flex-col">
+      <Seo
+        title="밴티지웍스 | 굿즈 OEM·ODM · 중국 소싱 파트너"
+        description="굿즈 OEM·ODM, 중국 소싱, 웨이하이 구매대행·물류, 이우 1:1 소싱투어까지 한 팀으로 운영합니다. 기획부터 검수·출고까지 든든한 제조·소싱 파트너."
+        path="/"
+      />
       {/* Hero Section - Premium & Trustworthy */}
       <section className="relative overflow-hidden bg-background pt-28 pb-20 lg:pt-40 lg:pb-32">
         {/* Architectural Grid Background */}

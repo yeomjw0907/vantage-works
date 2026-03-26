@@ -13,10 +13,16 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { ServicesSubnav } from "@/components/layout/ServicesSubnav";
 import { Link } from "react-router-dom";
+import { Seo } from "@/components/seo/Seo";
 
 export function PurchasingLogistics() {
   return (
     <div className="flex flex-col bg-background">
+      <Seo
+        title="구매대행 및 물류 | 밴티지웍스"
+        description="중국 웨이하이 직영 센터 기반으로 발주·정밀검수(QC)·재포장·라벨링·통관·국내 배송까지 통합 풀필먼트를 제공합니다."
+        path="/services/purchasing"
+      />
       <ServicesSubnav />
       {/* Hero Section - Centered Typography Layout */}
       <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border/40">

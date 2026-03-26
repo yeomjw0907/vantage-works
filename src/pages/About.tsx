@@ -3,10 +3,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, MapPin, Globe, Truck, ArrowRight, Target, ShieldCheck, Zap } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Seo } from "@/components/seo/Seo";
 
 export function About() {
   return (
     <div className="flex flex-col">
+      <Seo
+        title="회사소개 | 밴티지웍스"
+        description="밴티지웍스는 굿즈 OEM·ODM, 중국 소싱, 구매대행·물류, 1:1 소싱투어까지 한국·중국 전문가가 한 팀으로 운영합니다. 커뮤니케이션부터 현지 실행까지 안정적으로 운영합니다."
+        path="/about"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background py-24 lg:py-32 border-b border-border/40">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>

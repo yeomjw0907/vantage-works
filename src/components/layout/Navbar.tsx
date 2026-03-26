@@ -5,7 +5,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { useSiteSettings } from "@/lib/useSiteSettings";
 
 const defaultNavItems = [
-  { name: "홈", href: "/" },
   { name: "회사소개", href: "/about" },
   { 
     name: "서비스", 
@@ -26,7 +25,8 @@ export function Navbar() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const location = useLocation();
   const siteSettings = useSiteSettings();
-  const navItems = siteSettings?.nav_items?.length ? siteSettings.nav_items : defaultNavItems;
+  const navItemsRaw = siteSettings?.nav_items?.length ? siteSettings.nav_items : defaultNavItems;
+  const navItems = navItemsRaw.filter((item) => item.href !== "/" && item.name !== "홈");
 
   const isServiceActive = location.pathname.startsWith("/services") || location.pathname === "/sourcing-tour";
 
